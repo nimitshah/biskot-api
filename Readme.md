@@ -1,23 +1,65 @@
-# Microservice Setup
-BISKOT API is the new micro service responsible for managing the cart of an e-commerce website.
+# Biskot
+Biskot API is micro service responsible for managing the cart of an e-commerce website.
 
-## Your Mission should you choose to accept it, is to:
+Before attempting to crunch the code, we strongly recommend you to carefully read each of the sections below:
 
-* Implement the endpoints defined in the swagger [biskot.yaml](contract/biskot.yaml), api model classes could be generated using openapi-generator-maven-plugin configured in pom.xml
-* Setup the development best practices
+## Exercise goal
 
-## Cart business rules:
+* Implement the endpoints defined in the [biskot.yaml](contract/biskot.yaml) api model. To better understand the model, we suggest you open the `yaml` file in a fancy UI available [here](https://editor.swagger.io/).
+
+To give you an idea of what is the expected result from each endpoint looks like, below some examples:
+
+> #### action: POST /carts
+> response http code: 200
+
+> #### action: GET /carts/{cartId}
+> response http code: 200
+>
+> response body:
+>```json
+>{
+>  "id": 1,
+>  "products": [
+>    {
+>      "id": 1,
+>      "label": "Déodorant Spray 200ml Ice Dive ADIDAS",
+>      "quantity": 1,
+>      "unit_price": 2.00,
+>      "line_price": 2.00
+>    }
+>  ],
+>  "totalPrice": 6.00
+>}
+>>```
+
+> #### action: PUT /carts/{cartId}/products
+> request body:
+> ```json
+> {
+>    "id": 1,
+>    "quantity": 2
+>  }
+>```
+> response http code: 200
+
+## Cart business rules
 
 * Added quantity of a product should not exceed the stock availability
 * Total price of the cart should not exceed 100 euros
-* Cart cannot contain more than 3 different products
+* A cart cannot contain more than 3 different products
 
-## Info
-Carts should be persisted in memory using an embedded db or collection of you choice inside [InMemoryCartRepository](src/main/java/com/biskot/infra/repository/InMemoryCartRepository.java)
+## Additional details and considerations
+* Carts could be persisted in memory using an embedded db or a collection of you choice inside [InMemoryCartRepository](src/main/java/com/biskot/infra/repository/InMemoryCartRepository.java)
+* Biskot has a dependency with an external service allowing you to get products information. The interactions with this external service should be implemented in [ProductGateway](src/main/java/com/biskot/infra/gateway/ProductGateway.java)
+* As long as you respect the exercise goal, you have complete freedom to apply as many coding practices or external libraries as you see fit.  
 
-Biskot has a dependency with an external service allowing you to get products information. The call to this external service should be implemented in [ProductGateway](src/main/java/com/biskot/infra/gateway/ProductGateway.java)
-A mock server is configured in [ProductMockServer](src/main/java/com/biskot/infra/mock/ProductMockServer.java) and products could be retrieved using this url : GET http://localhost:9001/products/{productId} (productId could take values from 1 to 4)
+## Tips
+* The Java contract classes as well as the api interface can be generated using the openapi-generator-maven-plugin configured in `pom.xml` file
+* A mock server has already been configured in [ProductMockServer](src/main/java/com/biskot/infra/mock/ProductMockServer.java) from which products can be retrieved calling:
+GET http://localhost:9001/products/{productId} (productId ranges from 1 to 4)
+* The project is structured using [hexagonal architecture](https://blog.octo.com/architecture-hexagonale-trois-principes-et-un-exemple-dimplementation/), so please be aware to implement all layers (you will find `// TODO: to be implemented` comments when expect you to provide an implementation). 
 
-Biskot must be efficient and prod-ready
+## Submission
+When you feel confident with your implementation, please push your work in a source code management of your choice and share it with us.
 
-As always, should you finish the implementation, please push your work in the source code management of your choice and please, share it with us
+Happy Coding. Good luck!
