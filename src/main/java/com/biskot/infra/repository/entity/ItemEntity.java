@@ -1,5 +1,5 @@
 package com.biskot.infra.repository.entity;
 
-public class ProductEntity {
+public class ItemEntity {
     // TODO: to be implemented
 }

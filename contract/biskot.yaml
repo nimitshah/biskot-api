@@ -36,15 +36,15 @@ paths:
                 $ref: '#/components/schemas/CartResponse'
         '404':
           description: Cart not found
-  /carts/{cartId}/products:
+  /carts/{cartId}/items:
     put:
       tags:
         - Cart
-      summary: Add products to a cart.
-      operationId: addProductToCart
+      summary: Add/update items in the cart.
+      operationId: addItemToCart
       responses:
         '200':
-          description: Product added
+          description: Item added
         '400':
           description: Business rules have not been respected
         '404':
@@ -54,7 +54,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddProductRequest'
+              $ref: '#/components/schemas/AddItemRequest'
       parameters:
         - name: cartId
           in: path
@@ -70,20 +70,21 @@ components:
       properties:
         id:
           type: integer
-        products:
+          format: int64
+        items:
           type: array
           items:
-            $ref: '#/components/schemas/ProductResponse'
+            $ref: '#/components/schemas/ItemResponse'
         totalPrice:
           type: number
           format: double
-    ProductResponse:
+    ItemResponse:
       type: object
       properties:
-        id:
+        product_id:
           type: integer
           format: int64
-        label:
+        product_label:
           type: string
         quantity:
           type: integer
@@ -93,11 +94,15 @@ components:
         line_price:
           type: number
           format: double
-    AddProductRequest:
+    AddItemRequest:
       type: object
       properties:
-        id:
+        product_id:
+          description: id of product to add
           type: integer
+          format: int64
+          example: 3
         quantity:
+          description: quantity to add, or updated quantity in case of existing product in cart
           type: integer
- 
+          example: 2

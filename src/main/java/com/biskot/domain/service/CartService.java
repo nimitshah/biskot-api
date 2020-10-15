@@ -8,5 +8,5 @@ public interface CartService {
 
     Cart getCart(long cartId);
 
-    void addProductToCart(long cartId, long productId, int quantityToAdd);
+    void addItemToCart(long cartId, long productId, int quantityToAdd);
 }

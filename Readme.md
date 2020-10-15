@@ -19,24 +19,24 @@ To give you an idea of what is the expected result from each endpoint looks like
 >```json
 >{
 >  "id": 1,
->  "products": [
+>  "items": [
 >    {
->      "id": 1,
->      "label": "Déodorant Spray 200ml Ice Dive ADIDAS",
->      "quantity": 1,
+>      "product_id": 1,
+>      "product_label": "Déodorant Spray 200ml Ice Dive ADIDAS",
+>      "quantity": 2,
 >      "unit_price": 2.00,
 >      "line_price": 2.00
 >    }
 >  ],
->  "totalPrice": 6.00
+>  "totalPrice": 4.00
 >}
 >>```
 
-> #### action: PUT /carts/{cartId}/products
+> #### action: PUT /carts/{cartId}/items
 > request body:
 > ```json
 > {
->    "id": 1,
+>    "product_id": 1,
 >    "quantity": 2
 >  }
 >```
