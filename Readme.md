@@ -30,15 +30,15 @@ To give you an idea of what is the expected result from each endpoint looks like
 >  ],
 >  "totalPrice": 4.00
 >}
->>```
+>```
 
 > #### action: PUT /carts/{cartId}/items
 > request body:
 > ```json
 > {
->    "product_id": 1,
->    "quantity": 2
->  }
+>   "product_id": 1,
+>   "quantity": 2
+> }
 >```
 > response http code: 200
 
