@@ -1,7 +1,9 @@
 package com.biskot.domain.service;
 
 import com.biskot.domain.model.Cart;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CartServiceImpl implements CartService {
     @Override
     public void createCart() {
